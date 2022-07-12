@@ -39,10 +39,22 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOne(@PathVariable Long id) {
-        Optional<Author> author = authorService.findById(id);
-        if (!author.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author is not found");
+        Optional<Author> authorOptional = authorService.findById(id);
+        if (!authorOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author is not found.");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(author.get());
+        return ResponseEntity.status(HttpStatus.OK).body(authorOptional.get());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody @Valid AuthorDto authorDto) {
+        Optional<Author> authorOptional = authorService.findById(id);
+        if (!authorOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author is not found.");
+        }
+        var author = new Author();
+        BeanUtils.copyProperties(authorDto, author);
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.save(author));
+    }
+    
 }
