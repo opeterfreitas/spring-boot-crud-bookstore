@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bookstore/authors")
@@ -32,9 +33,16 @@ public class AuthorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Author>> getAll(){
+    public ResponseEntity<List<Author>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(authorService.findAll());
-
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOne(@PathVariable Long id) {
+        Optional<Author> author = authorService.findById(id);
+        if (!author.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author is not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(author.get());
+    }
 }

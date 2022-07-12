@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -25,8 +26,11 @@ public class AuthorService {
         return authorRepository.existsByEmail(email);
     }
 
-    public List<Author> findAll(){
+    public List<Author> findAll() {
         return authorRepository.findAll();
     }
 
+    public Optional<Author> findById(Long id) {
+        return authorRepository.findById(id);
+    }
 }
