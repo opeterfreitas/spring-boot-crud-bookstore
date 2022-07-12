@@ -24,7 +24,10 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody @Valid AuthorDto authorDto){
+    public ResponseEntity<Object> save(@RequestBody @Valid AuthorDto authorDto) {
+        if (authorService.existsByEmail(authorDto.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Email is already in use!");
+        }
         var author = new Author();
         BeanUtils.copyProperties(authorDto, author);
         return ResponseEntity.status(HttpStatus.CREATED).body(authorService.save(author));

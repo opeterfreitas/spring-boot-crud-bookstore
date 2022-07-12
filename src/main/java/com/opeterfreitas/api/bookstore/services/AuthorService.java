@@ -16,8 +16,12 @@ public class AuthorService {
     }
 
     @Transactional
-    public Author save(Author author){
+    public Author save(Author author) {
         return authorRepository.save(author);
+    }
+
+    public boolean existsByEmail(String email) {
+        return authorRepository.existsByEmail(email);
     }
 
 }
