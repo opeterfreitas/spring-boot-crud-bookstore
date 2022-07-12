@@ -7,11 +7,9 @@ import javax.validation.constraints.Size;
 public class AuthorDto {
 
     @NotBlank
-    @Size(max = 130)
     private String name;
     @NotBlank
     @Email
-    @Size(max = 130)
     private String email;
     @NotBlank
     @Size(max = 400)

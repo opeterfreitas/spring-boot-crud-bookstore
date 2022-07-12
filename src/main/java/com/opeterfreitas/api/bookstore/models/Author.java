@@ -9,9 +9,9 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false, length = 130)
+    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, length = 130)
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false, length = 400)
     private String description;
