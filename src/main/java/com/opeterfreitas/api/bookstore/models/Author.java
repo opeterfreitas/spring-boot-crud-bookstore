@@ -22,6 +22,10 @@ public class Author {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,4 +54,7 @@ public class Author {
         return registrationMoment;
     }
 
+    public void setRegistrationMoment(LocalDateTime registrationMoment) {
+        this.registrationMoment = registrationMoment;
+    }
 }

@@ -33,4 +33,9 @@ public class AuthorService {
     public Optional<Author> findById(Long id) {
         return authorRepository.findById(id);
     }
+
+    @Transactional
+    public void delete(Author author){
+        authorRepository.delete(author);
+    }
 }

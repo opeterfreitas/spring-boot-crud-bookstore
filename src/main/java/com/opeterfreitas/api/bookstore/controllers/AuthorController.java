@@ -54,7 +54,19 @@ public class AuthorController {
         }
         var author = new Author();
         BeanUtils.copyProperties(authorDto, author);
+        author.setId(authorOptional.get().getId());
+        author.setRegistrationMoment(authorOptional.get().getRegistrationMoment());
         return ResponseEntity.status(HttpStatus.OK).body(authorService.save(author));
     }
-    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+        Optional<Author> authorOptional = authorService.findById(id);
+        if (!authorOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author is not found.");
+        }
+        authorService.delete(authorOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Parking Spot deleted successfully.");
+    }
+
 }
