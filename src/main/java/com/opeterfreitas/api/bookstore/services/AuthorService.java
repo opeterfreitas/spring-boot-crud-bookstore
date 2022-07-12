@@ -5,6 +5,7 @@ import com.opeterfreitas.api.bookstore.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class AuthorService {
@@ -22,6 +23,10 @@ public class AuthorService {
 
     public boolean existsByEmail(String email) {
         return authorRepository.existsByEmail(email);
+    }
+
+    public List<Author> findAll(){
+        return authorRepository.findAll();
     }
 
 }

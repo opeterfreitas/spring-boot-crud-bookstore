@@ -6,12 +6,10 @@ import com.opeterfreitas.api.bookstore.services.AuthorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bookstore/authors")
@@ -31,6 +29,12 @@ public class AuthorController {
         var author = new Author();
         BeanUtils.copyProperties(authorDto, author);
         return ResponseEntity.status(HttpStatus.CREATED).body(authorService.save(author));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Author>> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.findAll());
+
     }
 
 }
